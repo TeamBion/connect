@@ -12,7 +12,7 @@ Example Usage:
 ```
 
 You can select easily with interactive menu
-<img src="./img/demo.png"></img>
+
 
 # Setup
 You can install python3 dependencies like that :
