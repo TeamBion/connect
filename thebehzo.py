@@ -48,6 +48,7 @@ def connector(ec2Client):
 		sys.exit(1)
 
 	else:
+
 		terminal_menu = TerminalMenu(instances)
 		menu_entry_index = terminal_menu.show()
 		startSession(instances[menu_entry_index])

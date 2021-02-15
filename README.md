@@ -4,6 +4,8 @@ AWS Ssm Connector to able access EC2 instance without recheck dashboard or conne
 # Usage
 Example Usage: 
 
+
+<img src="./img/demo.gif"></img>
 ```
     $ thebehzo eu-west-
     > kubernetes-worker-1 , i-INSTANCE_ID
