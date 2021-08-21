@@ -4,7 +4,6 @@ AWS Ssm Connector to able access EC2 instance without access to AWS dashboard.Th
 # Usage
 Example Usage:
 
-<img src="./img/demo.gif"></img>
 ```
     $ connect --region eu-west-1
     > kubernetes-worker-1 , i-INSTANCE_ID
@@ -17,6 +16,7 @@ You can set the specified tags for your EC2 instances like that ;
    $ connect.py --region eu-west-2 --tag Name --value asg-development
 ```
 
+<img src="./img/demo.gif"></img>
 
 For more details 
 
