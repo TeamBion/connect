@@ -5,6 +5,16 @@ import sys
 import os
 import subprocess
 
+
+def parseTag(tags, specifiedTag="Name"):
+	parsedTagValue = ""
+	for tag in tags:
+		if tag["Key"] == specifiedTag:
+			parsedTagValue = tag["Value"]
+		else:
+			pass
+	return parsedTagValue
+
 def getRunningInstance(ec2Client):
 
 	gatheredInstances = []
@@ -13,21 +23,20 @@ def getRunningInstance(ec2Client):
 		'Values': ['running']}])
 
 	for instance in instances:
-		for tag in instance.tags:
-			if 'Name'in tag['Key']:
-				name = tag['Value']
-				tmp_instace = ""
-				tmp_instace = "{} , {}".format(name, instance.id)
-				gatheredInstances.append(tmp_instace)
+		instance_label = ""
+		instanceTag = parseTag(instance.tags)
+		instance_label = "{} , {}".format(instanceTag, instance.id)
+
+		gatheredInstances.append(instance_label)
 
 	return gatheredInstances
 
 
-def startSession(instanceKey):
+def startSession(instanceKey, region):
 	instanceId = instanceKey.split(" , ")[1]
-
+	print(instanceId)
 	if instanceId.startswith("i-"):
-		cmd = ['aws', 'ssm', 'start-session', '--target', instanceId]
+		cmd = ['aws', 'ssm', 'start-session', '--target', instanceId, '--region', region]
 		env = os.environ.copy()
 		p = subprocess.Popen(cmd, env=env)
 
@@ -40,7 +49,7 @@ def startSession(instanceKey):
 	else:
 		print("Invalid instance id {}".format(instanceId))
 
-def connector(ec2Client):
+def connector(ec2Client, region):
 	instances = getRunningInstance(ec2Client)
 
 	if instances == None or instances == '':
@@ -51,7 +60,7 @@ def connector(ec2Client):
 
 		terminal_menu = TerminalMenu(instances)
 		menu_entry_index = terminal_menu.show()
-		startSession(instances[menu_entry_index])
+		startSession(instances[menu_entry_index], region)
 
 
 if __name__ == "__main__":
@@ -64,4 +73,4 @@ if __name__ == "__main__":
 
 	ec2Client = boto3.resource("ec2", region_name=region)
 
-	connector(ec2Client)
+	connector(ec2Client, region)
