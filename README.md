@@ -1,5 +1,5 @@
 # connect
-AWS Ssm Connector to able access EC2 instance without recheck dashboard.
+AWS Ssm Connector to able access EC2 instance without access to AWS dashboard.This tools presents a simple menu for that purposes.
 
 # Usage
 Example Usage:
