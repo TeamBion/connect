@@ -6,11 +6,31 @@ Example Usage:
 
 <img src="./img/demo.gif"></img>
 ```
-    $ connect eu-west-1
+    $ connect --region eu-west-1
     > kubernetes-worker-1 , i-INSTANCE_ID
     > kubernetes-master , i-INSTANCE_ID
+```
+
+You can set the specified tags for your EC2 instances like that ;
 
 ```
+   $ connect.py --region eu-west-2 --tag Name --value asg-development
+```
+
+```
+For more details 
+
+```
+python3 connect.py --help
+Usage: connect.py [options]
+
+Options:
+  -h, --help            show this help message and exit
+  -r REGION, --region=REGION
+                        Region name of the aws account
+  -t TAG, --tag=TAG     Tag of the EC2 instance
+```
+
 
 You can select easily with interactive menu
 
