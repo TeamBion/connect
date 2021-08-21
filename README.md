@@ -17,7 +17,7 @@ You can set the specified tags for your EC2 instances like that ;
    $ connect.py --region eu-west-2 --tag Name --value asg-development
 ```
 
-```
+
 For more details 
 
 ```
