@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 from simple_term_menu import TerminalMenu
 import boto3
 import sys
@@ -70,13 +69,15 @@ def connector(ec2Client, region, tag, tagValue):
 		startSession(instances[menu_entry_index], region)
 
 
-if __name__ == "__main__":
+def main():
+	required="region".split()
+
 	try:
 		parser = optparse.OptionParser()
 
 		parser.add_option('-r', '--region',
 			action="store", dest="region",
-			help="Region name of the aws account", default="eu-west-1")
+			help="Region name of the aws account")
 
 		parser.add_option('-t', '--tag',
 			action="store", dest="tag",
@@ -86,17 +87,25 @@ if __name__ == "__main__":
 			action="store", dest="value",
 			help="Value of the EC2 instance tag", default="")
 			
-
 		(options, args) = parser.parse_args()
+
+		for r in required:
+			if options.__dict__[r] is None:
+				parser.error("parameter %s required"%r)
+
 		data = vars(options)
 		region = data["region"]
 		tag = data["tag"]
 		tagValue = data["value"]
 		
 	except Exception as exp:
-		print("Index error on usage behzo <REGION-NAME>, eu-west-1 using as default")
-		region = "eu-west-1"
+		print(exp)
 
-	ec2Client = boto3.resource("ec2", region_name=region)
+	try:
+		ec2Client = boto3.resource("ec2", region_name=region)
+	except botocore.exceptions.NoCredentialsError as exp:
+		print(exp)
+	except Exception as exp:
+		print(exp)
 
 	connector(ec2Client, region, tag, tagValue)

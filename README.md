@@ -1,26 +1,33 @@
 # connect
 AWS Ssm Connector to able access EC2 instance without access to AWS dashboard.This tools presents a simple menu for that purposes.
 
-# Usage
-Example Usage:
 
+# Installation
+
+connect tool basically developed as a pip3 package you easily setup all the dependencies and build the packages like this;
+
+```sh
+    $ pip3 install . --upgrade
 ```
+After your installation completed you can get the output like this
+
+```sh
     $ connect --region eu-west-1
     > kubernetes-worker-1 , i-INSTANCE_ID
     > kubernetes-master , i-INSTANCE_ID
 ```
 
-You can set the specified tags for your EC2 instances like that ;
+### Example usage
 
-```
+```sh
    $ connect.py --region eu-west-2 --tag Name --value asg-development
 ```
 
 For more details 
 
-```
-python3 connect.py --help
-Usage: connect.py [options]
+```sh
+connect --help
+Usage: connect [options]
 
 Options:
   -h, --help            show this help message and exit
@@ -34,7 +41,7 @@ You can select easily with interactive menu
 
 # Setup
 You can install python3 dependencies like that :
-```
+```sh
     $ pip3 install -r requirements.txt
 ```
 
@@ -43,8 +50,8 @@ To connect your instance over ssm client you have to install this plugin followi
 
 After than you should specify default AWS_PROFILE, or credential values into your terminal session (I prefer profile usage):
 
-```
+```sh
     $ export AWS_PROFILE=<MY_ACCOUNT_ID> AWS_DEFAULT_REGION=<REGION> AWS_SDK_LOAD_CONFIG=1
 ```
 
-Notice : If you want to run this via your shell, you should move somewhere in your $PATH directory:
+<b>Notice :</b> If you want to run this via your shell, you should move somewhere in your $PATH directory:
